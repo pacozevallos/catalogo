@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "catalogo-55d70": {
+      "hosting": {
+        "catalogoApp": [
+          "catalogo-55d70"
+        ]
+      }
+    }
+  }
+}
