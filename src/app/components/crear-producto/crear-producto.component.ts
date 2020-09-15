@@ -18,6 +18,7 @@ export class CrearProductoComponent implements OnInit {
 
   formProduct: FormGroup;
   @ViewChild('f') form;
+  deshabilitado: boolean;
   
   selectedFile: FileList | null;
   nameItem: any;
@@ -47,8 +48,10 @@ export class CrearProductoComponent implements OnInit {
   onSubmit() {
     if (this.formProduct.valid) {
       this.uploadFileAndCrearProducto();
+      this.deshabilitado = true;
     } else {
       this.validateAllFormFields(this.formProduct);
+      this.deshabilitado = false;
     }
   }
 
@@ -87,14 +90,14 @@ export class CrearProductoComponent implements OnInit {
             image: this.downloadURL,
             fechaCreacion: this.formProduct.value.fechaCreacion,
           });
-          // this.dialogRef.close();
           console.log( this.downloadURL );
           this.form.resetForm({
             fechaCreacion: firebase.firestore.FieldValue.serverTimestamp(),
           });
           this.snackBar.open('Producto creado', 'CERRAR', {
-            duration: 8000,
+            duration: 5000,
           });
+          this.deshabilitado = false;
         }).catch(err => { console.log(err); } );
       })
     )

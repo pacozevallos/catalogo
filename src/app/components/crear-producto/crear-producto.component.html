@@ -17,7 +17,11 @@
             <input type="file" formControlName="image" (change)="detectFiles($event)">
         </div>
         <div class="col-12 text-right">
-            <button class="btn btn-primary" type="submit">Crear Producto</button>
+            <button class="btn btn-primary px-3">
+                <mat-icon class="align-middle" *ngIf="!deshabilitado">add</mat-icon>
+                <mat-spinner *ngIf="deshabilitado" [diameter]="24" class="float-left mr-2"></mat-spinner>
+                Crear Producto
+              </button>
         </div>
     </form>
 </div>
