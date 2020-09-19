@@ -1,0 +1,51 @@
+<div class="container p-0 py-md-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-2 mb-md-3">
+        <p class="h4">Detalle del Producto</p>
+        <button mat-icon-button color="primary" (click)="cancelar()"><mat-icon>close</mat-icon> </button>
+    </div>
+
+    <div class="row d-flex justify-content-between">
+        <div class="col-md-5">
+            <img class="border rounded-lg" [src]="data.image" width="100%">
+        </div>
+        <div class="col-md-6">
+            <span class="small text-muted">Nombre:</span>
+            <p>{{data.nombre}}</p>
+            <span class="small text-muted">Descripcion:</span>
+            <p>{{data.descripcion}}</p>
+            <span class="small text-muted">Código:</span>
+            <p>{{data.id}}</p>
+            <!-- <span class="small text-muted">Familia:</span>
+            <p>
+                <span *ngIf="data.familia.perro === true">Perro</span>
+                <span *ngIf="data.familia.perro === true && data.familia.gato === true"> y </span>
+                <span *ngIf="data.familia.gato === true">Gato</span>
+            </p> -->
+            <span class="small text-muted">Categoría:</span>
+            <p>{{data.categoria}}</p>
+            <span class="small text-muted">Precio</span>
+            <p>{{data.precio | currency:'S/ ':'symbol':'1.2'}}</p>
+            <!-- <span class="small text-muted">Marca:</span>
+            <p>{{data.marca}}</p> -->
+        </div>
+        <!-- <div class="col-md-4">
+            <span class="small text-muted">Tipo:</span>
+            <p>{{data.tipo}}</p>
+            <div *ngIf="!data.precio">
+                <p class="small text-muted mb-1">Presentaciones:</p>
+                <div class="border-bottom d-flex justify-content-between py-2" *ngFor="let presentacion of data.presentaciones">
+                    <span>{{presentacion.precio}} {{presentacion.medida}}</span>
+                    <span>{{presentacion.precio | currency:'S/ ':'symbol':'1.2'}}</span>
+                </div>
+            </div>
+            <div *ngIf="data.precio">
+                <span class="small text-muted">Precio</span>
+                <p>{{data.precio | currency:'S/ ':'symbol':'1.2'}}</p>
+            </div>
+        </div> -->
+    </div>
+
+    <!-- <pre>{{data | json}}</pre> -->
+
+</div>

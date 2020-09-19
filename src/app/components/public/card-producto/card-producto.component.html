@@ -1,0 +1,7 @@
+<div class="rounded shadow-sm h-100 bg-white">
+    <img class="imageProduct rounded-top" [src]="producto.image" alt="">
+    <div class="bg-white p-3 rounded-bottom">
+        <p class="mb-2">{{producto.nombre}}</p>
+        <p class="h4 font-weight-bold mb-0">{{producto.precio | currency:'S/. ':'symbol':'1.2'}}</p>
+    </div>
+</div>

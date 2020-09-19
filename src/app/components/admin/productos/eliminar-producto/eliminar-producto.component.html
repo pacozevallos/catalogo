@@ -1,0 +1,24 @@
+<div>
+    <div class="d-flex justify-content-between align-items-center mb-2 mb-md-3">
+        <p class="tituloModal text-danger">Eliminar Producto</p>
+        <button mat-icon-button (click)="cancelar()"><mat-icon>close</mat-icon> </button>
+    </div>
+    <div class="">
+        <p class="lead">¿Está seguro que desea eliminar el siguiente producto?</p>
+        <div class="alert alert-danger">
+            <p class="mb-0"><strong>Código:</strong> {{data.id}}</p>
+            <p class="mb-0"><strong>Nombre:</strong> {{data.nombre}}</p>
+        </div>
+
+        <p class="small text-danger mb-3 mb-md-4">
+            <mat-icon [inline]="false">report_problem</mat-icon> Esta acción no se puede deshacer.</p>
+    </div>
+    <div class="text-right">
+        <button class="btn btn-link" (click)="cancelar()">Cancelar</button>
+        <button class="btn btn-danger ml-3" (click)="eliminarProducto(data.id, data.imageName)">
+          <mat-icon class="align-middle" *ngIf="!deshabilitado">add</mat-icon>
+          <mat-spinner *ngIf="deshabilitado" [diameter]="24" class="float-left mr-2"></mat-spinner>
+          Eliminar Producto</button>
+    </div>
+
+</div>

@@ -9,14 +9,23 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule  } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 
+import { MaterialFileInputModule } from 'ngx-material-file-input';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { AdminComponent } from './components/admin/admin.component';
 import { PublicComponent } from './components/public/public.component';
-import { InicioComponent } from './components/inicio/inicio.component';
-import { CrearProductoComponent } from './components/crear-producto/crear-producto.component';
+import { CrearProductoComponent } from './components/admin/productos/crear-producto/crear-producto.component';
+import { EliminarProductoComponent } from './components/admin/productos/eliminar-producto/eliminar-producto.component';
+import { EditarProductoComponent } from './components/admin/productos/editar-producto/editar-producto.component';
+import { ListaProductosComponent } from './components/admin/productos/lista-productos/lista-productos.component';
+import { HeaderComponent } from './components/public/header/header.component';
+import { InicioComponent } from './components/public/inicio/inicio.component';
+import { FooterComponent } from './components/public/footer/footer.component';
+import { DetalleProductoAdminComponent } from './components/admin/productos/detalle-producto-admin/detalle-producto-admin.component';
+import { CardProductoComponent } from './components/public/card-producto/card-producto.component';
 
 @NgModule({
   declarations: [
@@ -24,8 +33,14 @@ import { CrearProductoComponent } from './components/crear-producto/crear-produc
     PublicComponent,
     InicioComponent,
     AdminComponent,
-    CrearProductoComponent
-    
+    CrearProductoComponent,
+    EliminarProductoComponent,
+    EditarProductoComponent,
+    ListaProductosComponent,
+    HeaderComponent,
+    FooterComponent,
+    DetalleProductoAdminComponent,
+    CardProductoComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +52,8 @@ import { CrearProductoComponent } from './components/crear-producto/crear-produc
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
-    MaterialModule
+    MaterialModule,
+    MaterialFileInputModule
   ],
   providers: [],
   bootstrap: [AppComponent],

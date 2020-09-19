@@ -1,12 +1,14 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase/app';
+import { FileValidator } from 'ngx-material-file-input';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import { DataService } from 'src/app/services/data.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
@@ -17,32 +19,53 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 export class CrearProductoComponent implements OnInit {
 
   formProduct: FormGroup;
-  @ViewChild('f') form;
-  deshabilitado: boolean;
-  
+  // tipos = [
+  //   'Presentación única',
+  //   'Presentación múltiple'
+  // ];
+  // medidas = [
+  //   'Kg.', 'Ml.', 'Tab.'
+  // ];
+  visible = false;
+  deshabilitado = false;
   selectedFile: FileList | null;
   nameItem: any;
   uploadPercent: Observable<number>;
   downloadURL: Observable<string>;
 
+  // 1 MB
+  readonly maxSize = 1048576;
+  actualSize: any;
+
+  animales;
+  categorias;
+  marcas;
+  tipos;
+  medidas;
+
   constructor(
-    private fb:FormBuilder,
     private fs: FirebaseService,
+    private ds: DataService,
+    private fb: FormBuilder,
     private router: Router,
-    // public dialogRef: MatDialogRef<CrearProductoComponent>,
+    public dialogRef: MatDialogRef<CrearProductoComponent>,
     private afs: AngularFirestore,
-    private storage: AngularFireStorage,
-    public snackBar: MatSnackBar,
+    private storage: AngularFireStorage
   ) { }
 
   ngOnInit(): void {
     this.formProduct = this.fb.group({
-      titulo: ['', Validators.required],
+      categoria: ['', Validators.required],
+      nombre: ['', Validators.required],
       descripcion: ['', Validators.required],
-      precio: ['', Validators.required],
-      image: ['', Validators.required],
+      precio: [''],
+      image: [ '', [Validators.required, FileValidator.maxContentSize(this.maxSize)]],
+      publicado: [false],
+      destacado: [false],
       fechaCreacion: [firebase.firestore.Timestamp.fromDate(new Date())],
-    })
+    });
+
+    this.categorias = this.ds.categorias;
   }
 
   onSubmit() {
@@ -55,12 +78,12 @@ export class CrearProductoComponent implements OnInit {
     }
   }
 
-  // crearProducto() {
-  //   this.fs.addProduct(this.formProduct.value)
-  //     .then(() => {
-  //       this.dialogRef.close();
-  //     });
-  // }
+  crearProducto() {
+    this.fs.addProduct(this.formProduct.value)
+      .then(() => {
+        this.dialogRef.close();
+      });
+  }
 
   detectFiles(event) {
     this.selectedFile = event.target.files[0];
@@ -73,6 +96,7 @@ export class CrearProductoComponent implements OnInit {
     console.log(myTest.id);
 
     const file = this.selectedFile;
+    // const filePath = `imagesProducts/${myTest.id}/name1`;
     const filePath = `imagesProducts/${myTest.id}/${this.nameItem}`;
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
@@ -84,20 +108,18 @@ export class CrearProductoComponent implements OnInit {
         fileRef.getDownloadURL().toPromise().then( (url) => {
           this.downloadURL = url;
           myTest.set({
-            titulo: this.formProduct.value.titulo,
+            categoria: this.formProduct.value.categoria,
+            nombre: this.formProduct.value.nombre,
             descripcion: this.formProduct.value.descripcion,
-            precio: this.formProduct.value.precio,
             image: this.downloadURL,
+            imageName: this.nameItem,
+            precio: this.formProduct.value.precio,
+            publicado: this.formProduct.value.publicado,
+            destacado: this.formProduct.value.destacado,
             fechaCreacion: this.formProduct.value.fechaCreacion,
           });
+          this.dialogRef.close();
           console.log( this.downloadURL );
-          this.form.resetForm({
-            fechaCreacion: firebase.firestore.FieldValue.serverTimestamp(),
-          });
-          this.snackBar.open('Producto creado', 'CERRAR', {
-            duration: 5000,
-          });
-          this.deshabilitado = false;
         }).catch(err => { console.log(err); } );
       })
     )
@@ -114,6 +136,33 @@ export class CrearProductoComponent implements OnInit {
         this.validateAllFormFields(control);
       }
     });
+  }
+
+  agregarPresentacion() {
+    // tslint:disable-next-line:no-string-literal
+    (this.formProduct.controls['presentaciones'] as FormArray).push(
+      this.fb.group({
+        presentacion: [''],
+        medida: [''],
+        precio: ['']
+      })
+    );
+  }
+
+  eliminarPresentacion(index: number): void {
+    // tslint:disable-next-line:no-string-literal
+    // (this.formProduct.controls['presentaciones']as FormArray).removeAt(index);
+    const control = this.formProduct.controls.presentaciones as FormArray;
+    control.removeAt(index);
+  }
+
+  cancelar() {
+    this.dialogRef.close();
+  }
+
+  errorImagen() {
+    return this.formProduct.controls.image.hasError('required') ? 'La imagen es necesaria' :
+    this.formProduct.controls.image.hasError('maxContentSize') ? 'El peso de la imagen no debe exceder a 1 MB' : '';
   }
 
 }

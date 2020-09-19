@@ -1,0 +1,8 @@
+<div class="bg-light pt-4 pt-md-5 pb-6 pb-md-8">
+    <div class="container">
+        <p class="h3">Productos</p>
+        <div class="grillaProducts">
+            <app-card-producto *ngFor="let producto of productos | async" [producto]="producto"></app-card-producto>
+        </div>
+    </div>
+</div>

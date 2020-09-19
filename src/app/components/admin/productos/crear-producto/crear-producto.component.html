@@ -1,0 +1,90 @@
+<div class="col-md-5 mx-auto p-0 py-md-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4 mb-md-5">
+        <p class="h4 mb-0 text-primary">Crear Producto</p>
+        <button mat-icon-button color="primary" (click)="cancelar()"><mat-icon>close</mat-icon> </button>
+    </div>
+    <form [formGroup]="formProduct" (submit)="onSubmit()" novalidate>
+        <div class="row">
+
+            <mat-form-field appearance="outline" class="col-12">
+                <mat-label>Nombre</mat-label>
+                <input matInput formControlName="nombre" placeholder="Nombre del producto">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="col-12">
+                <mat-label>Descripción</mat-label>
+                <textarea matInput rows="5" formControlName="descripcion" placeholder="Describe el producto"></textarea>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="col-6">
+                <mat-label>Categoría</mat-label>
+                <mat-select formControlName="categoria">
+                    <mat-option *ngFor="let categoria of categorias" [value]="categoria">{{categoria}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="col-6">
+                <mat-label>Precio S/.</mat-label>
+                <input type="number" matInput formControlName="precio">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="col-12">
+                <mat-label>Imagen</mat-label>
+                <ngx-mat-file-input #removableInput formControlName="image" placeholder="Seleccionar imagen" accept=".jpg, .jpeg, .png" (change)="detectFiles($event)"></ngx-mat-file-input>
+                <button mat-icon-button matSuffix *ngIf="!removableInput.empty" (click)="removableInput.clear($event)">
+              <mat-icon>clear</mat-icon>
+              </button>
+                <mat-icon matSuffix *ngIf="removableInput.empty">image_search</mat-icon>
+                <mat-error *ngIf="errorImagen()">{{errorImagen()}}</mat-error>
+                <mat-hint>Peso máximo de la imagen: 1 MB.</mat-hint>
+            </mat-form-field>
+
+            <!-- <mat-radio-group class="col-12 mt-3 mt-md-4" formControlName="tipo">
+                <mat-radio-button class="mr-3" *ngFor="let tipo of tipos" [value]="tipo">{{tipo}}</mat-radio-button>
+            </mat-radio-group> -->
+
+           
+
+            <!-- <div class="col-12" formArrayName="presentaciones" *ngIf="formProduct.value.tipo === 'Presentación múltiple'">
+                <div *ngFor="let presentacion of formProduct.controls['presentaciones']['controls']; let i = index;">
+                    <div class="d-flex" [formGroupName]="i">
+                        <div class="row w-100">
+                            <mat-form-field appearance="outline" class="col-4 col-md-4">
+                                <mat-label>Presentación</mat-label>
+                                <input matInput formControlName="presentacion">
+                            </mat-form-field>
+                            <mat-form-field appearance="outline" class="col-4 col-md-4">
+                                <mat-label>Medida</mat-label>
+                                <mat-select formControlName="medida">
+                                    <mat-option *ngFor="let medida of medidas" [value]="medida">{{medida}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field appearance="outline" class="col-4 col-md-4">
+                                <mat-label>Precio S/.</mat-label>
+                                <input matInput type="number" formControlName="precio">
+                            </mat-form-field>
+                        </div>
+                        <div class="flex-shrink-1 d-flex align-items-center">
+                            <button mat-icon-button (click)="eliminarPresentacion(i)"><mat-icon class="material-icons-outlined">delete</mat-icon></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <button class="mb-3 btn btn-link btn-sm px-0" type="button" (click)="agregarPresentacion()">Agregar presentación</button>
+                </div>
+            </div> -->
+
+
+
+            <div class="col-12 text-right">
+                <button class="btn btn-primary px-3">
+                  <mat-icon class="align-middle" *ngIf="!deshabilitado">add</mat-icon>
+                  <mat-spinner *ngIf="deshabilitado" [diameter]="24" class="float-left mr-2"></mat-spinner>
+                  Crear Producto
+                </button>
+            </div>
+        </div>
+    </form>
+    <!-- <pre>{{formProduct.value | json}}</pre> -->
+</div>
