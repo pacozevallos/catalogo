@@ -26,6 +26,7 @@ import { InicioComponent } from './components/public/inicio/inicio.component';
 import { FooterComponent } from './components/public/footer/footer.component';
 import { DetalleProductoAdminComponent } from './components/admin/productos/detalle-producto-admin/detalle-producto-admin.component';
 import { CardProductoComponent } from './components/public/card-producto/card-producto.component';
+import { LoginComponent } from './components/public/login/login.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { CardProductoComponent } from './components/public/card-producto/card-pr
     FooterComponent,
     DetalleProductoAdminComponent,
     CardProductoComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
