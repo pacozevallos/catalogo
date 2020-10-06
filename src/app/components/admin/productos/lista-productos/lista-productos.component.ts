@@ -97,6 +97,5 @@ export class ListaProductosComponent implements OnInit {
   trackByPublicado(item) {
     return item.publicado;
   }
-  
 
 }

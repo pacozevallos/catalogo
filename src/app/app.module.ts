@@ -27,6 +27,7 @@ import { FooterComponent } from './components/public/footer/footer.component';
 import { DetalleProductoAdminComponent } from './components/admin/productos/detalle-producto-admin/detalle-producto-admin.component';
 import { CardProductoComponent } from './components/public/card-producto/card-producto.component';
 import { LoginComponent } from './components/public/login/login.component';
+import { HeaderAdminComponent } from './components/admin/header-admin/header-admin.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { LoginComponent } from './components/public/login/login.component';
     DetalleProductoAdminComponent,
     CardProductoComponent,
     LoginComponent,
+    HeaderAdminComponent,
   ],
   imports: [
     BrowserModule,

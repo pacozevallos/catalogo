@@ -1,22 +1,22 @@
 <div class="container py-3 py-md-4">
 
-    
+
 
     <div class="d-flex justify-content-between align-content-center mb-2 mb-md-3">
-        <p class="h3 mb-0">Productos</p>
+        <p class="h4 mb-0">Productos</p>
         <div>
             <button class="btn btn-primary" (click)="openModalCrear()">
                 <mat-icon>add</mat-icon> Crear</button>
         </div>
     </div>
 
-        <div class="">
-            <mat-form-field appearance="outline" class="w-100">
-                <mat-label>Buscar</mat-label>
-                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Ingresa una palabra">
-            </mat-form-field>
-        </div>
-    
+    <div class="">
+        <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Buscar</mat-label>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Ingresa una palabra">
+        </mat-form-field>
+    </div>
+
 
 
 

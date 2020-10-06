@@ -8,6 +8,7 @@ import { AngularFireAuthGuard, redirectUnauthorizedTo } from '@angular/fire/auth
 import { LoginComponent } from './components/public/login/login.component';
 // import { AuthGuard } from './guards/auth.guard';
 
+// Angularfire
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['/login']);
 
 const routes: Routes = [

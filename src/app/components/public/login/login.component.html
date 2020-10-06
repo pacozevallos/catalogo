@@ -1,1 +1,19 @@
-<p>login works!</p>
+<div class="container py-4 py-md-6">
+    <div class="col-md-5 mx-auto">
+        <p class="text-center h2 mb-3 mb-md-4">Login</p>
+        <form [formGroup]="formLogin" (ngSubmit)="onSubmit()" novalidate class="row">
+            <mat-form-field appearance="outline" class="col-12">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" placeholder="Email">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="col-12">
+                <mat-label>Password</mat-label>
+                <input type="password" matInput formControlName="password" placeholder="Password" [type]="hide ? 'password' : 'text'">
+                <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide"><mat-icon class="text-muted">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon></button>
+            </mat-form-field>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary btn-block py-2">Ingresar</button>
+            </div>
+        </form>
+    </div>
+</div>
