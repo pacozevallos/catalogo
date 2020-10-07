@@ -39,6 +39,13 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  googleLogin() {
+    this.auth.googleLogin()
+    .then(() => {
+      // this.dialogRef.close();
+    });
+  }
+
   validateAllFormFields(formGroup: FormGroup) {
     Object.keys(formGroup.controls).forEach(field => {
       const control = formGroup.get(field);

@@ -1,8 +1,23 @@
 <div class="bg-light">
     <div class="container">
         <div class="py-3 py-md-3 d-flex justify-content-between">
-            <p class="h2 mb-0">Administrador</p>
-            <button class="btn btn-outline-primary" (click)="logout()">Cerrar sesión</button>
+            <p class="h1 mb-0">Administrador</p>
+            <div class="d-flex align-items-center">
+                <div class="text-right mr-2">
+                    <p class="h5 mb-0 font-weight-bold">{{displayName}}</p>
+                    <p class="mb-0 text-muted font-weight-light">{{email}}</p>
+                </div>
+                <img class="rounded-circle border mr-2" [src]="photoURL" width="60px">
+                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="logout()">
+                    <span>Cerrar sesión</span>
+                  </button>
+                </mat-menu>
+            </div>
+            <!-- <button class="btn btn-outline-primary" (click)="logout()">Cerrar sesión</button> -->
         </div>
     </div>
 </div>

@@ -23,17 +23,7 @@ export class AuthService {
     public router: Router,
     public snackBar: MatSnackBar,
     public readonly ngZone: NgZone,
-  ) {
-    // this.user = this.afAuth.authState.pipe(
-    //   switchMap(user => {
-    //       if (user) {
-    //         return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
-    //       } else {
-    //         return of(null);
-    //       }
-    //     })
-    //   );
-  }
+  ) { }
 
 
   emailLogin(email: string, password: string ) {
@@ -49,6 +39,33 @@ export class AuthService {
       .catch(error => {
         this.handleError(error);
       });
+  }
+
+  googleLogin() {
+    const provider = new auth.GoogleAuthProvider();
+    return this.oAuthLogin(provider);
+  }
+
+  oAuthLogin(provider) {
+    return this.afAuth.signInWithPopup(provider)
+      .then((credential) => {
+        this.pushUserDataProviders(credential.user);
+        this.router.navigate(['/admin/productos']);
+      })
+      .catch(error => {
+        this.handleError(error);
+      });
+  }
+
+  pushUserDataProviders( user: User ) {
+    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
+    const data: User = {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+    };
+    userRef.set(data, {merge: true});
   }
 
   signOut() {

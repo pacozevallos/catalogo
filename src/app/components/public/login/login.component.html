@@ -1,6 +1,8 @@
 <div class="container py-4 py-md-6">
     <div class="col-md-5 mx-auto">
         <p class="text-center h2 mb-3 mb-md-4">Login</p>
+        <button class="btn btn-danger btn-block py-2 mb-3" (click)="googleLogin()">Ingresar con Google</button>
+        <p class="text-center small text-muted">O ingresa con tu usuario y contraseña</p>
         <form [formGroup]="formLogin" (ngSubmit)="onSubmit()" novalidate class="row">
             <mat-form-field appearance="outline" class="col-12">
                 <mat-label>Email</mat-label>
