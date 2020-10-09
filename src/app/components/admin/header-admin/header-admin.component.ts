@@ -27,7 +27,7 @@ export class HeaderAdminComponent implements OnInit {
         this.email = user.email;
         this.photoURL = user.photoURL;
       }
-      console.log(user?.uid);
+      // console.log(user?.uid);
     });
   }
 

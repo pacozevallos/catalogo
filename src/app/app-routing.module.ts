@@ -20,9 +20,8 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'admin', component: AdminComponent, canActivate: [
-      AngularFireAuthGuard],
-      data: { authGuardPipe: redirectUnauthorizedToLogin },
+    path: 'admin', component: AdminComponent,
+    // canActivate: [ AngularFireAuthGuard ], data: { authGuardPipe: redirectUnauthorizedToLogin },
     children: [
       { path: 'productos', component: ListaProductosComponent },
     ]
